@@ -11,6 +11,12 @@ import xadrez.enumeracao.Cor;
 
 public class IU {
 	
+	// https://stackoverflow.com/questions/2979383/java-clear-the-console
+	public static void limparTela() {
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+	
 	// https://stackoverflow.com/questions/5762491/how-to-print-color-in-console-using-system-out-println
 
 	public static final String ANSI_RESET = "\u001B[0m";
@@ -40,7 +46,7 @@ public class IU {
 			return new PosicaoXadrez(coluna, linha);
 		}
 		catch (RuntimeException e){
-			throw new InputMismatchException("Erro ao ler PosicaoXadrez. Valores válidos são de a1 até h8.");			
+			throw new InputMismatchException("Favor, informar posicoes validas. Valores validos sao de a1 ate h8.");			
 		}		
 	}
 	

@@ -4,7 +4,7 @@ import tabuleiro.Peca;
 import tabuleiro.Tabuleiro;
 import xadrez.enumeracao.Cor;
 
-public class PecaDeXadrez extends Peca{
+public abstract class PecaDeXadrez extends Peca{
 	
 	private Cor cor;
 	private int contadorMovimento;

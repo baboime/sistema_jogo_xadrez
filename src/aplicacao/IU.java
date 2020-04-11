@@ -61,6 +61,9 @@ public class IU {
 		System.out.println();
 		System.out.println("Turno: " + partidaDeXadrez.getTurno());
 		System.out.println("Aguardando jogador da peca: " + partidaDeXadrez.getJogadorAtual());
+		if (partidaDeXadrez.getCheck()) {
+			System.out.println(ANSI_RED + "CHECK!" + ANSI_RESET);
+		}
 	}
 	
 	public static void exibirTabuleiro(PecaDeXadrez[][] pecas) {

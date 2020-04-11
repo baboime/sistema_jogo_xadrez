@@ -31,6 +31,12 @@ public class PartidaDeXadrez {
 		return matriz;
 	}
 	
+	public boolean[][] movimentosPossiveis(PosicaoXadrez posicaoOrigem) {
+		Posicao posicao = posicaoOrigem.paraPosicao();
+		validarPosicaoOrigem(posicao);
+		return tabuleiro.peca(posicao).movimentosPossiveis();
+	}
+	
 	public PecaDeXadrez executaMovimentoXadrez(PosicaoXadrez posicaoOrigem, PosicaoXadrez posicaoDestino) {
 		//converter as duas posições para posições da matriz
 		Posicao origem = posicaoOrigem.paraPosicao();
@@ -95,7 +101,7 @@ public class PartidaDeXadrez {
 		colocarPecaNova('f', 1, new Bispo(tabuleiro, Cor.BRANCA));
 		colocarPecaNova('g', 1, new Cavalo(tabuleiro, Cor.BRANCA));
 		colocarPecaNova('h', 1, new Torre(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('a', 2, new Peao(tabuleiro, Cor.BRANCA));
+		colocarPecaNova('c', 3, new Peao(tabuleiro, Cor.BRANCA));  //ajustar para posicao a2
 		colocarPecaNova('b', 2, new Peao(tabuleiro, Cor.BRANCA));
 		colocarPecaNova('c', 2, new Peao(tabuleiro, Cor.BRANCA));
 		colocarPecaNova('d', 2, new Peao(tabuleiro, Cor.BRANCA));

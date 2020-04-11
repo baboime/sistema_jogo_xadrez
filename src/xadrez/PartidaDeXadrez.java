@@ -104,7 +104,7 @@ public class PartidaDeXadrez {
 		colocarPecaNova('c', 3, new Peao(tabuleiro, Cor.BRANCA));  //ajustar para posicao a2
 		colocarPecaNova('b', 2, new Peao(tabuleiro, Cor.BRANCA));
 		colocarPecaNova('c', 2, new Peao(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('d', 2, new Peao(tabuleiro, Cor.BRANCA));
+		colocarPecaNova('e', 3, new Peao(tabuleiro, Cor.BRANCA));  //ajustar para posicao d2
 		colocarPecaNova('e', 2, new Peao(tabuleiro, Cor.BRANCA));
 		colocarPecaNova('f', 2, new Peao(tabuleiro, Cor.BRANCA));
 		colocarPecaNova('g', 2, new Peao(tabuleiro, Cor.BRANCA));

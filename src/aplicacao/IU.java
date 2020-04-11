@@ -60,10 +60,17 @@ public class IU {
 		exibirPecasCapturadas(pecaCatpurada);
 		System.out.println();
 		System.out.println("Turno: " + partidaDeXadrez.getTurno());
-		System.out.println("Aguardando jogador da peca: " + partidaDeXadrez.getJogadorAtual());
-		if (partidaDeXadrez.getCheck()) {
-			System.out.println(ANSI_RED + "CHECK!" + ANSI_RESET);
+		if (!partidaDeXadrez.getCheckMate()) {
+			System.out.println("Aguardando jogador da peca: " + partidaDeXadrez.getJogadorAtual());
+			if (partidaDeXadrez.getCheck()) {
+				System.out.println(ANSI_RED + "CHECK!" + ANSI_RESET);
+			}	
 		}
+		else {
+			System.out.println(ANSI_GREEN + "!!!! CHECKMATE !!!!");
+			System.out.println("Vencedor: " + partidaDeXadrez.getJogadorAtual());
+		}
+		
 	}
 	
 	public static void exibirTabuleiro(PecaDeXadrez[][] pecas) {

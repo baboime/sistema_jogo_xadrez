@@ -22,6 +22,7 @@ public class PartidaDeXadrez {
 	private Cor jogadorAtual;
 	private Tabuleiro tabuleiro;
 	private boolean check; // por padrão uma variavel booleana recebe false
+	private boolean checkMate;
 	
 	private List<Peca> pecasNoTabuleiro = new ArrayList<>();
 	private List<Peca> pecasCatpuradas = new ArrayList<>();
@@ -43,6 +44,10 @@ public class PartidaDeXadrez {
 	
 	public boolean getCheck() {
 		return check;
+	}
+	
+	public boolean getCheckMate() {
+		return checkMate;
 	}
 	
 	public PecaDeXadrez[][] obterPecas() {
@@ -76,7 +81,13 @@ public class PartidaDeXadrez {
 		
 		check = (testarCheck(oponente(jogadorAtual))) ? true : false;
 		
-		proximoTurno();
+		if (testarCheckMate(oponente(jogadorAtual))) {
+			checkMate = true;
+		}
+		else {
+			proximoTurno();
+		}
+		
 		return (PecaDeXadrez) pecaCapturada;
 	}
 	
@@ -146,11 +157,36 @@ public class PartidaDeXadrez {
 		List<Peca> pecasDoOponente = pecasNoTabuleiro.stream().filter(x -> ((PecaDeXadrez)x).getCor() == oponente(cor)).collect(Collectors.toList());
 		for (Peca p : pecasDoOponente) {
 			boolean[][] matriz = p.movimentosPossiveis();
-			if (matriz[posicaoDoRei.getColuna()][posicaoDoRei.getLinha()]) {
+			if (matriz[posicaoDoRei.getLinha()][posicaoDoRei.getColuna()]) {
 				return true;
 			}
 		}
 		return false;
+	}
+	
+	private boolean testarCheckMate(Cor cor) {
+		if (!testarCheck(cor)) {
+			return false;
+		}
+		List <Peca> lista = pecasNoTabuleiro.stream().filter(x -> ((PecaDeXadrez)x).getCor() == cor).collect(Collectors.toList());
+		for (Peca p : lista) {
+			boolean [][] matriz = p.movimentosPossiveis();
+			for (int i=0; i<tabuleiro.getLinhas(); i++) {
+				for (int j=0; j<tabuleiro.getColunas(); j++) {
+					if(matriz[i][j]) {
+						Posicao origem = ((PecaDeXadrez)p).obterPosicaoXadrez().paraPosicao();
+						Posicao destino = new Posicao(i, j);
+						Peca pecaCapturada = realizarMovimento(origem, destino);
+						boolean testeCheck = testarCheck(cor);
+						desfazerMovimento(origem, destino, pecaCapturada);
+						if (!testeCheck) {
+							return false;
+						}	
+					}				
+				}
+			}
+		}
+		return true;
 	}
 	
 	private void colocarPecaNova(char coluna, int linha, PecaDeXadrez peca) {
@@ -161,38 +197,38 @@ public class PartidaDeXadrez {
 	//Metodo reponsável pela disposição inicial das peças
 	private void setupInicial() {
 		//Peças pretas
-		colocarPecaNova('a', 8, new Torre(tabuleiro, Cor.PRETA));
-		colocarPecaNova('b', 8, new Cavalo(tabuleiro, Cor.PRETA));
-		colocarPecaNova('c', 8, new Bispo(tabuleiro, Cor.PRETA));
-		colocarPecaNova('d', 8, new Rei(tabuleiro, Cor.PRETA));
-		colocarPecaNova('e', 8, new Rainha(tabuleiro, Cor.PRETA));
-		colocarPecaNova('f', 8, new Bispo(tabuleiro, Cor.PRETA));
-		colocarPecaNova('g', 8, new Cavalo(tabuleiro, Cor.PRETA));
+		colocarPecaNova('b', 8, new Torre(tabuleiro, Cor.PRETA)); // ajustar para a, 8
+//		colocarPecaNova('b', 8, new Cavalo(tabuleiro, Cor.PRETA));
+//		colocarPecaNova('c', 8, new Bispo(tabuleiro, Cor.PRETA));
+		colocarPecaNova('a', 8, new Rei(tabuleiro, Cor.PRETA));  // ajustar para d, 8
+//		colocarPecaNova('e', 8, new Rainha(tabuleiro, Cor.PRETA));
+//		colocarPecaNova('f', 8, new Bispo(tabuleiro, Cor.PRETA));
+//		colocarPecaNova('g', 8, new Cavalo(tabuleiro, Cor.PRETA));
 		colocarPecaNova('h', 8, new Torre(tabuleiro, Cor.PRETA));
-		colocarPecaNova('a', 7, new Peao(tabuleiro, Cor.PRETA));
-		colocarPecaNova('b', 7, new Peao(tabuleiro, Cor.PRETA));
-		colocarPecaNova('c', 7, new Peao(tabuleiro, Cor.PRETA));
-		colocarPecaNova('d', 7, new Peao(tabuleiro, Cor.PRETA));
-		colocarPecaNova('e', 7, new Peao(tabuleiro, Cor.PRETA));
-		colocarPecaNova('f', 7, new Peao(tabuleiro, Cor.PRETA));
-		colocarPecaNova('g', 7, new Peao(tabuleiro, Cor.PRETA));
-		colocarPecaNova('h', 7, new Peao(tabuleiro, Cor.PRETA));
+//		colocarPecaNova('a', 7, new Peao(tabuleiro, Cor.PRETA));
+//		colocarPecaNova('b', 7, new Peao(tabuleiro, Cor.PRETA));
+//		colocarPecaNova('c', 7, new Peao(tabuleiro, Cor.PRETA));
+//		colocarPecaNova('d', 7, new Peao(tabuleiro, Cor.PRETA));
+//		colocarPecaNova('e', 7, new Peao(tabuleiro, Cor.PRETA));
+//		colocarPecaNova('f', 7, new Peao(tabuleiro, Cor.PRETA));
+//		colocarPecaNova('g', 7, new Peao(tabuleiro, Cor.PRETA));
+//		colocarPecaNova('h', 7, new Peao(tabuleiro, Cor.PRETA));
 		//Peças brancas
-		colocarPecaNova('a', 1, new Torre(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('b', 1, new Cavalo(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('c', 1, new Bispo(tabuleiro, Cor.BRANCA));
+		colocarPecaNova('b', 1, new Torre(tabuleiro, Cor.BRANCA));
+//		colocarPecaNova('h', 7, new Cavalo(tabuleiro, Cor.BRANCA)); // ajustar para b, 1
+//		colocarPecaNova('c', 1, new Bispo(tabuleiro, Cor.BRANCA));
 		colocarPecaNova('d', 1, new Rei(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('e', 1, new Rainha(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('f', 1, new Bispo(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('g', 1, new Cavalo(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('h', 1, new Torre(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('c', 3, new Peao(tabuleiro, Cor.BRANCA));  //ajustar para posicao a2
-		colocarPecaNova('b', 2, new Peao(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('c', 2, new Peao(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('e', 3, new Peao(tabuleiro, Cor.BRANCA));  //ajustar para posicao d2
-		colocarPecaNova('e', 2, new Peao(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('f', 2, new Peao(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('g', 2, new Peao(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('h', 2, new Peao(tabuleiro, Cor.BRANCA));
+//		colocarPecaNova('e', 1, new Rainha(tabuleiro, Cor.BRANCA));
+//		colocarPecaNova('f', 1, new Bispo(tabuleiro, Cor.BRANCA));
+//		colocarPecaNova('g', 1, new Cavalo(tabuleiro, Cor.BRANCA));
+		colocarPecaNova('h', 7, new Torre(tabuleiro, Cor.BRANCA)); // ajustar para h, 1
+//		colocarPecaNova('a', 2, new Peao(tabuleiro, Cor.BRANCA));  
+//		colocarPecaNova('b', 2, new Peao(tabuleiro, Cor.BRANCA));
+//		colocarPecaNova('c', 2, new Peao(tabuleiro, Cor.BRANCA));
+//		colocarPecaNova('d', 2, new Peao(tabuleiro, Cor.BRANCA));
+//		colocarPecaNova('e', 2, new Peao(tabuleiro, Cor.BRANCA));
+//		colocarPecaNova('f', 2, new Peao(tabuleiro, Cor.BRANCA));
+//		colocarPecaNova('g', 2, new Peao(tabuleiro, Cor.BRANCA));
+//		colocarPecaNova('h', 2, new Peao(tabuleiro, Cor.BRANCA));
 	}
 }

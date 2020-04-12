@@ -13,7 +13,6 @@ public abstract class PecaDeXadrez extends Peca{
 	public PecaDeXadrez(Tabuleiro tabuleiro, Cor cor) {
 		super(tabuleiro);
 		this.cor = cor;
-		this.contadorMovimento = 0;
 	}
 
 	public Cor getCor() {
@@ -28,8 +27,20 @@ public abstract class PecaDeXadrez extends Peca{
 		return contadorMovimento;
 	}
 	
+	public void setContadorMovimento(int contadorMovimento) {
+		this.contadorMovimento = contadorMovimento;
+	}
+
 	protected boolean existePecaOponente(Posicao posicao) {
 		PecaDeXadrez p = (PecaDeXadrez) getTabuleiro().peca(posicao);
 		return p != null && p.getCor() != cor;
+	}
+	
+	protected void incrementaContadorDeMovimento() {
+		contadorMovimento++;
+	}
+	
+	protected void decrementaContadorDeMovimento() {
+		contadorMovimento--;
 	}
 }

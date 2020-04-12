@@ -92,7 +92,8 @@ public class PartidaDeXadrez {
 	}
 	
 	private Peca realizarMovimento(Posicao origem, Posicao destino) {
-		Peca p = tabuleiro.removerPeca(origem);
+		PecaDeXadrez p = (PecaDeXadrez) tabuleiro.removerPeca(origem);
+		p.incrementaContadorDeMovimento();
 		Peca pecaCapturada = tabuleiro.removerPeca(destino);
 		tabuleiro.colocarPeca(p, destino);
 		
@@ -104,7 +105,8 @@ public class PartidaDeXadrez {
 	}
 	
 	private void desfazerMovimento(Posicao origem, Posicao destino, Peca pecaCapturada) {
-		Peca p = tabuleiro.removerPeca(destino);
+		PecaDeXadrez p = (PecaDeXadrez) tabuleiro.removerPeca(destino);
+		p.decrementaContadorDeMovimento();
 		tabuleiro.colocarPeca(p, origem);
 		
 		if (pecaCapturada != null) {
@@ -197,38 +199,38 @@ public class PartidaDeXadrez {
 	//Metodo reponsável pela disposição inicial das peças
 	private void setupInicial() {
 		//Peças pretas
-		colocarPecaNova('b', 8, new Torre(tabuleiro, Cor.PRETA)); // ajustar para a, 8
+		colocarPecaNova('a', 8, new Torre(tabuleiro, Cor.PRETA)); 
 //		colocarPecaNova('b', 8, new Cavalo(tabuleiro, Cor.PRETA));
 //		colocarPecaNova('c', 8, new Bispo(tabuleiro, Cor.PRETA));
-		colocarPecaNova('a', 8, new Rei(tabuleiro, Cor.PRETA));  // ajustar para d, 8
-//		colocarPecaNova('e', 8, new Rainha(tabuleiro, Cor.PRETA));
+//		colocarPecaNova('d', 8, new Rainha(tabuleiro, Cor.PRETA));  
+		colocarPecaNova('e', 8, new Rei(tabuleiro, Cor.PRETA));
 //		colocarPecaNova('f', 8, new Bispo(tabuleiro, Cor.PRETA));
 //		colocarPecaNova('g', 8, new Cavalo(tabuleiro, Cor.PRETA));
 		colocarPecaNova('h', 8, new Torre(tabuleiro, Cor.PRETA));
-//		colocarPecaNova('a', 7, new Peao(tabuleiro, Cor.PRETA));
-//		colocarPecaNova('b', 7, new Peao(tabuleiro, Cor.PRETA));
-//		colocarPecaNova('c', 7, new Peao(tabuleiro, Cor.PRETA));
-//		colocarPecaNova('d', 7, new Peao(tabuleiro, Cor.PRETA));
-//		colocarPecaNova('e', 7, new Peao(tabuleiro, Cor.PRETA));
-//		colocarPecaNova('f', 7, new Peao(tabuleiro, Cor.PRETA));
-//		colocarPecaNova('g', 7, new Peao(tabuleiro, Cor.PRETA));
-//		colocarPecaNova('h', 7, new Peao(tabuleiro, Cor.PRETA));
+		colocarPecaNova('a', 7, new Peao(tabuleiro, Cor.PRETA));
+		colocarPecaNova('b', 7, new Peao(tabuleiro, Cor.PRETA));
+		colocarPecaNova('c', 7, new Peao(tabuleiro, Cor.PRETA));
+		colocarPecaNova('d', 7, new Peao(tabuleiro, Cor.PRETA));
+		colocarPecaNova('e', 7, new Peao(tabuleiro, Cor.PRETA));
+		colocarPecaNova('f', 7, new Peao(tabuleiro, Cor.PRETA));
+		colocarPecaNova('g', 7, new Peao(tabuleiro, Cor.PRETA));
+		colocarPecaNova('h', 7, new Peao(tabuleiro, Cor.PRETA));
 		//Peças brancas
-		colocarPecaNova('b', 1, new Torre(tabuleiro, Cor.BRANCA));
-//		colocarPecaNova('h', 7, new Cavalo(tabuleiro, Cor.BRANCA)); // ajustar para b, 1
+		colocarPecaNova('a', 1, new Torre(tabuleiro, Cor.BRANCA));
+//		colocarPecaNova('b', 1, new Cavalo(tabuleiro, Cor.BRANCA)); 
 //		colocarPecaNova('c', 1, new Bispo(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('d', 1, new Rei(tabuleiro, Cor.BRANCA));
-//		colocarPecaNova('e', 1, new Rainha(tabuleiro, Cor.BRANCA));
+//		colocarPecaNova('d', 1, new Rainha(tabuleiro, Cor.BRANCA));
+		colocarPecaNova('e', 1, new Rei(tabuleiro, Cor.BRANCA));
 //		colocarPecaNova('f', 1, new Bispo(tabuleiro, Cor.BRANCA));
 //		colocarPecaNova('g', 1, new Cavalo(tabuleiro, Cor.BRANCA));
-		colocarPecaNova('h', 7, new Torre(tabuleiro, Cor.BRANCA)); // ajustar para h, 1
-//		colocarPecaNova('a', 2, new Peao(tabuleiro, Cor.BRANCA));  
-//		colocarPecaNova('b', 2, new Peao(tabuleiro, Cor.BRANCA));
-//		colocarPecaNova('c', 2, new Peao(tabuleiro, Cor.BRANCA));
-//		colocarPecaNova('d', 2, new Peao(tabuleiro, Cor.BRANCA));
-//		colocarPecaNova('e', 2, new Peao(tabuleiro, Cor.BRANCA));
-//		colocarPecaNova('f', 2, new Peao(tabuleiro, Cor.BRANCA));
-//		colocarPecaNova('g', 2, new Peao(tabuleiro, Cor.BRANCA));
-//		colocarPecaNova('h', 2, new Peao(tabuleiro, Cor.BRANCA));
+		colocarPecaNova('h', 1, new Torre(tabuleiro, Cor.BRANCA)); 
+		colocarPecaNova('a', 2, new Peao(tabuleiro, Cor.BRANCA));  
+		colocarPecaNova('b', 2, new Peao(tabuleiro, Cor.BRANCA));
+		colocarPecaNova('c', 2, new Peao(tabuleiro, Cor.BRANCA));
+		colocarPecaNova('d', 2, new Peao(tabuleiro, Cor.BRANCA));
+		colocarPecaNova('e', 2, new Peao(tabuleiro, Cor.BRANCA));
+		colocarPecaNova('f', 2, new Peao(tabuleiro, Cor.BRANCA));
+		colocarPecaNova('g', 2, new Peao(tabuleiro, Cor.BRANCA));
+		colocarPecaNova('h', 2, new Peao(tabuleiro, Cor.BRANCA));
 	}
 }

@@ -70,7 +70,6 @@ public class IU {
 			System.out.println(ANSI_GREEN + "!!!! CHECKMATE !!!!");
 			System.out.println("Vencedor: " + partidaDeXadrez.getJogadorAtual());
 		}
-		
 	}
 	
 	public static void exibirTabuleiro(PecaDeXadrez[][] pecas) {

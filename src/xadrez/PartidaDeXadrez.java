@@ -201,10 +201,10 @@ public class PartidaDeXadrez {
 		//Peças pretas
 		colocarPecaNova('a', 8, new Torre(tabuleiro, Cor.PRETA)); 
 //		colocarPecaNova('b', 8, new Cavalo(tabuleiro, Cor.PRETA));
-//		colocarPecaNova('c', 8, new Bispo(tabuleiro, Cor.PRETA));
+		colocarPecaNova('c', 8, new Bispo(tabuleiro, Cor.PRETA));
 //		colocarPecaNova('d', 8, new Rainha(tabuleiro, Cor.PRETA));  
 		colocarPecaNova('e', 8, new Rei(tabuleiro, Cor.PRETA));
-//		colocarPecaNova('f', 8, new Bispo(tabuleiro, Cor.PRETA));
+		colocarPecaNova('f', 8, new Bispo(tabuleiro, Cor.PRETA));
 //		colocarPecaNova('g', 8, new Cavalo(tabuleiro, Cor.PRETA));
 		colocarPecaNova('h', 8, new Torre(tabuleiro, Cor.PRETA));
 		colocarPecaNova('a', 7, new Peao(tabuleiro, Cor.PRETA));
@@ -218,10 +218,10 @@ public class PartidaDeXadrez {
 		//Peças brancas
 		colocarPecaNova('a', 1, new Torre(tabuleiro, Cor.BRANCA));
 //		colocarPecaNova('b', 1, new Cavalo(tabuleiro, Cor.BRANCA)); 
-//		colocarPecaNova('c', 1, new Bispo(tabuleiro, Cor.BRANCA));
+		colocarPecaNova('c', 1, new Bispo(tabuleiro, Cor.BRANCA));
 //		colocarPecaNova('d', 1, new Rainha(tabuleiro, Cor.BRANCA));
 		colocarPecaNova('e', 1, new Rei(tabuleiro, Cor.BRANCA));
-//		colocarPecaNova('f', 1, new Bispo(tabuleiro, Cor.BRANCA));
+		colocarPecaNova('f', 1, new Bispo(tabuleiro, Cor.BRANCA));
 //		colocarPecaNova('g', 1, new Cavalo(tabuleiro, Cor.BRANCA));
 		colocarPecaNova('h', 1, new Torre(tabuleiro, Cor.BRANCA)); 
 		colocarPecaNova('a', 2, new Peao(tabuleiro, Cor.BRANCA));  

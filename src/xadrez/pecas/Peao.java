@@ -52,11 +52,11 @@ public class Peao extends PecaDeXadrez{
 			// movimento especial en passant
 			if (posicao.getLinha() == 3) {
 				Posicao esquerda = new Posicao(posicao.getLinha(), posicao.getColuna() - 1);
-				if (getTabuleiro().existeUmaPeca(esquerda) && existePecaOponente(esquerda) && getTabuleiro().peca(esquerda) == partidaDeXadrez.getEnPassantVulnerabilidade()) {
+				if (getTabuleiro().posicaoExiste(esquerda) && existePecaOponente(esquerda) && getTabuleiro().peca(esquerda) == partidaDeXadrez.getEnPassantVulnerabilidade()) {
 					matriz[esquerda.getLinha() - 1][esquerda.getColuna()] = true;
 				}
 				Posicao direita = new Posicao(posicao.getLinha(), posicao.getColuna() + 1);
-				if (getTabuleiro().existeUmaPeca(direita) && existePecaOponente(direita) && getTabuleiro().peca(direita) == partidaDeXadrez.getEnPassantVulnerabilidade()) {
+				if (getTabuleiro().posicaoExiste(direita) && existePecaOponente(direita) && getTabuleiro().peca(direita) == partidaDeXadrez.getEnPassantVulnerabilidade()) {
 					matriz[direita.getLinha() - 1][direita.getColuna()] = true;
 				}
 			}
@@ -88,11 +88,11 @@ public class Peao extends PecaDeXadrez{
 			// movimento especial en passant
 			if (posicao.getLinha() == 4) {
 				Posicao esquerda = new Posicao(posicao.getLinha(), posicao.getColuna() - 1);
-				if (getTabuleiro().existeUmaPeca(esquerda) && existePecaOponente(esquerda) && getTabuleiro().peca(esquerda) == partidaDeXadrez.getEnPassantVulnerabilidade()) {
+				if (getTabuleiro().posicaoExiste(esquerda) && existePecaOponente(esquerda) && getTabuleiro().peca(esquerda) == partidaDeXadrez.getEnPassantVulnerabilidade()) {
 					matriz[esquerda.getLinha() + 1][esquerda.getColuna()] = true;
 				}
 				Posicao direita = new Posicao(posicao.getLinha(), posicao.getColuna() + 1);
-				if (getTabuleiro().existeUmaPeca(direita) && existePecaOponente(direita) && getTabuleiro().peca(direita) == partidaDeXadrez.getEnPassantVulnerabilidade()) {
+				if (getTabuleiro().posicaoExiste(direita) && existePecaOponente(direita) && getTabuleiro().peca(direita) == partidaDeXadrez.getEnPassantVulnerabilidade()) {
 					matriz[direita.getLinha() + 1][direita.getColuna()] = true;
 				}
 			}
